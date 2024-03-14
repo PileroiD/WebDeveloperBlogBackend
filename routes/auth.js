@@ -43,8 +43,8 @@ authRouter.post("/login", async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: env.ENVIRONMENT === "LIVE",
-            sameSite: env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+            secure: process.env.ENVIRONMENT === "LIVE",
+            sameSite: process.env.ENVIRONMENT === "LIVE" ? "none" : "lax",
         }).send({
             error: null,
             user: mapUser(user),
@@ -58,8 +58,8 @@ authRouter.post("/login", async (req, res) => {
 authRouter.post("/logout", (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
-        secure: env.ENVIRONMENT === "LIVE",
-        sameSite: env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+        secure: process.env.ENVIRONMENT === "LIVE",
+        sameSite: process.env.ENVIRONMENT === "LIVE" ? "none" : "lax",
     }).send({});
 });
 
