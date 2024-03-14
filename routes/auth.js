@@ -16,8 +16,9 @@ authRouter.post("/register", async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.ENVIRONMENT === "LIVE",
-            sameSite: process.env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+            sameSite: "none",
+            secure: true,
+            domain: "https://web-developer-blog-frontend-26pbwxmld.vercel.app/",
         }).send({
             error: null,
             user: mapUser(user),
@@ -43,8 +44,9 @@ authRouter.post("/login", async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.ENVIRONMENT === "LIVE",
-            sameSite: process.env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+            sameSite: "none",
+            secure: true,
+            domain: "https://web-developer-blog-frontend-26pbwxmld.vercel.app/",
         }).send({
             error: null,
             user: mapUser(user),
@@ -58,8 +60,9 @@ authRouter.post("/login", async (req, res) => {
 authRouter.post("/logout", (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
-        secure: process.env.ENVIRONMENT === "LIVE",
-        sameSite: process.env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+        sameSite: "none",
+        secure: true,
+        domain: "https://web-developer-blog-frontend-26pbwxmld.vercel.app/",
     }).send({});
 });
 
