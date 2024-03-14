@@ -1,13 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 import cors from "cors";
 
 import router from "./routes/index.js";
 
-// dotenv.config();
-// const db = process.env.DB;
+dotenv.config();
+const db = process.env.DB;
 
 const port = 3001;
 const app = express();
@@ -18,7 +18,7 @@ app.use(cors());
 app.use("/", router);
 
 mongoose
-    .connect(process.env.MONGODB_URI)
+    .connect(process.env.MONGO_DB)
     .then(() => {
         console.log("DB ok");
 
