@@ -21,15 +21,15 @@ mongoose
     .connect(process.env.MONGO_DB)
     .then(() => {
         console.log("DB ok");
-
-        app.listen(process.env.PORT || 3001, (error) => {
-            if (error) {
-                return console.log(error);
-            }
-
-            console.log("Server OK");
-        });
     })
     .catch((error) => {
         console.log("DB error: ", error);
     });
+
+app.listen(process.env.PORT || 3001, (error) => {
+    if (error) {
+        return console.log(error);
+    }
+
+    console.log("Server OK");
+});
