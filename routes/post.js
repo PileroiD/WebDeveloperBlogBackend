@@ -34,30 +34,27 @@ postRouter.get("/:id", async (req, res) => {
     }
 });
 
-postRouter.post(
-    "/",
-    /* checkAuth, hasRole([roles.ADMIN] ),*/ async (req, res) => {
-        try {
-            const data = {
-                title: req.body.title,
-                image_url: req.body.imageUrl,
-                content: req.body.content,
-            };
+postRouter.post("/", checkAuth, hasRole([roles.ADMIN]), async (req, res) => {
+    try {
+        const data = {
+            title: req.body.title,
+            image_url: req.body.imageUrl,
+            content: req.body.content,
+        };
 
-            const post = await PostController.addPost(data);
+        const post = await PostController.addPost(data);
 
-            res.send({ data: mapPost(post) });
-        } catch (error) {
-            console.log("error :>> ", error);
-            res.status(404).send({ error: error.message || "Unknown error" });
-        }
+        res.send({ data: mapPost(post) });
+    } catch (error) {
+        console.log("error :>> ", error);
+        res.status(404).send({ error: error.message || "Unknown error" });
     }
-);
+});
 
 postRouter.patch(
     "/:id",
-    /* checkAuth,
-    hasRole([roles.ADMIN] ),*/
+    checkAuth,
+    hasRole([roles.ADMIN]),
     async (req, res) => {
         try {
             const data = {
@@ -78,8 +75,8 @@ postRouter.patch(
 
 postRouter.delete(
     "/:id",
-    /* checkAuth,
-    hasRole([roles.ADMIN] ),*/
+    checkAuth,
+    hasRole([roles.ADMIN]),
     async (req, res) => {
         try {
             await PostController.deletePost(req.params.id);
@@ -92,32 +89,26 @@ postRouter.delete(
 );
 
 // comments
-postRouter.post(
-    "/:id/comments",
-    /* checkAuth ,*/ async (req, res) => {
-        try {
-            const data = {
-                author: req.user._id,
-                content: req.body.content,
-            };
+postRouter.post("/:id/comments", checkAuth, async (req, res) => {
+    try {
+        const data = {
+            author: req.user._id,
+            content: req.body.content,
+        };
 
-            const comment = await CommentController.addComment(
-                req.params.id,
-                data
-            );
+        const comment = await CommentController.addComment(req.params.id, data);
 
-            res.send({ data: mapComment(comment) });
-        } catch (error) {
-            console.log("error :>> ", error);
-            res.status(404).send({ error: error.message || "Unknown error" });
-        }
+        res.send({ data: mapComment(comment) });
+    } catch (error) {
+        console.log("error :>> ", error);
+        res.status(404).send({ error: error.message || "Unknown error" });
     }
-);
+});
 
 postRouter.delete(
     "/:postId/comments/:commentId",
-    /* checkAuth,
-    hasRole([roles.ADMIN, roles.MODERATOR] ),*/
+    checkAuth,
+    hasRole([roles.ADMIN, roles.MODERATOR]),
     async (req, res) => {
         try {
             await CommentController.deleteComment(
