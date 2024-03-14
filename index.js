@@ -1,12 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import cors from "cors";
 
 import router from "./routes/index.js";
 
-dotenv.config();
+// dotenv.config();
 // const db = process.env.DB;
 
 const port = 3001;
