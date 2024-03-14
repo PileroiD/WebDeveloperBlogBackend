@@ -11,7 +11,11 @@ authRouter.post("/register", async (req, res) => {
             req.body.password
         );
 
-        res.cookie("token", token, { httpOnly: false }).send({
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: env.ENVIRONMENT === "LIVE",
+            sameSite: env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+        }).send({
             error: null,
             user: mapUser(user),
         });
@@ -34,7 +38,11 @@ authRouter.post("/login", async (req, res) => {
             req.body.password
         );
 
-        res.cookie("token", token, { httpOnly: false }).send({
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: env.ENVIRONMENT === "LIVE",
+            sameSite: env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+        }).send({
             error: null,
             user: mapUser(user),
         });
@@ -45,7 +53,11 @@ authRouter.post("/login", async (req, res) => {
 });
 
 authRouter.post("/logout", (req, res) => {
-    res.cookie("token", "", { httpOnly: false }).send({});
+    res.cookie("token", "", {
+        httpOnly: true,
+        secure: env.ENVIRONMENT === "LIVE",
+        sameSite: env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+    }).send({});
 });
 
 export default authRouter;
