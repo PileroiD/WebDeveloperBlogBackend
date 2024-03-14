@@ -19,6 +19,7 @@ app.use("/", router);
 
 mongoose
     .connect(process.env.MONGO_DB)
+    // for heroku
     .then(() => {
         console.log("DB ok");
     })
