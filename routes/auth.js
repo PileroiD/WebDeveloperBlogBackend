@@ -1,6 +1,9 @@
 import express from "express";
 import * as UserController from "../controllers/user.js";
 import mapUser from "../helpers/mapUser.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const authRouter = express.Router({ mergeParams: true });
 
@@ -13,8 +16,8 @@ authRouter.post("/register", async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: env.ENVIRONMENT === "LIVE",
-            sameSite: env.ENVIRONMENT === "LIVE" ? "none" : "lax",
+            secure: process.env.ENVIRONMENT === "LIVE",
+            sameSite: process.env.ENVIRONMENT === "LIVE" ? "none" : "lax",
         }).send({
             error: null,
             user: mapUser(user),
