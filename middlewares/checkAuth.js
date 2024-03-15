@@ -4,7 +4,7 @@ import { UserModel } from "../models/User.js";
 export const checkAuth = async (req, res, next) => {
     try {
         const tokenData = verify(
-            res.headers.get("Set-Cookie").split(";")[0].split("=")[1]
+            req.headers.get("Set-Cookie").split(";")[0].split("=")[1]
         );
 
         const user = await UserModel.findById({ _id: tokenData.id });
