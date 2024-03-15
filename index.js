@@ -13,18 +13,7 @@ const port = 3001;
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(
-    cors({
-        origin: ["https://web-developer-blog-frontend-26pbwxmld.vercel.app"],
-        credentials: true,
-        methods: ["GET", "PATCH", "POST", "DELETE"],
-        allowedHeaders: [
-            "Access-Control-Allow-Origin",
-            "Content-Type",
-            "Authorization",
-        ],
-    })
-);
+app.use(cors());
 
 app.use("/", router);
 
