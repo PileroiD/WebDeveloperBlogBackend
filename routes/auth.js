@@ -15,7 +15,7 @@ authRouter.post("/register", async (req, res) => {
         );
 
         res.cookie("token", token, {
-            httpOnly: true,
+            httpOnly: false,
             sameSite: "none",
             secure: true,
             domain: "https://web-developer-blog-frontend-26pbwxmld.vercel.app/",
@@ -43,7 +43,7 @@ authRouter.post("/login", async (req, res) => {
         );
 
         res.cookie("token", token, {
-            httpOnly: true,
+            httpOnly: false,
             sameSite: "none",
             secure: true,
             domain: "https://web-developer-blog-frontend-26pbwxmld.vercel.app/",
@@ -59,7 +59,7 @@ authRouter.post("/login", async (req, res) => {
 
 authRouter.post("/logout", (req, res) => {
     res.cookie("token", "", {
-        httpOnly: true,
+        httpOnly: false,
         sameSite: "none",
         secure: true,
         domain: "https://web-developer-blog-frontend-26pbwxmld.vercel.app/",
