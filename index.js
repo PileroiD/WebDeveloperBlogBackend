@@ -7,18 +7,17 @@ import cors from "cors";
 import router from "./routes/index.js";
 
 dotenv.config();
-const db = process.env.DB;
+const db = process.env.MONGO_DB;
 
-const port = 3001;
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
 app.use("/", router);
 
 mongoose
-    .connect(process.env.MONGO_DB)
+    .connect(db)
     .then(() => {
         console.log("DB ok");
     })
